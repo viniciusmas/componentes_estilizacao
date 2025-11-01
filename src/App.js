@@ -1,23 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import { ProfileCard } from "./components/ProfileCard";
 
 function App() {
+  const data = {
+    name: "Vinicius M A Souza",
+    age: "45",
+    bio: "Sou DEV",
+    avatarUrl:
+      "https://lh3.googleusercontent.com/a/ACg8ocKdlnv7gu3voaRanaCsmhuqJAkQs8a-P6QPkWXxs2Y7SA5ErY0=s96-c",
+    skills: ["ReactJs", "PHP", "React Native", "Angular", "Laravel"],
+  };
+
+  const [login, setLogin] = useState(false);
+
+  if (!login) {
+    return (
+      <div>
+        <button
+          onClick={() => {
+            setLogin(true);
+          }}
+        >
+          Fazer login
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button
+        onClick={() => {
+          setLogin(false);
+        }}
+      >
+        Fazer logout
+      </button>
+      <ProfileCard
+        name={data.name}
+        age={data.age}
+        bio={data.bio}
+        avatarUrl={data.avatarUrl}
+        skills={data.skills}
+      />
+
+      <ProfileCard {...data} age={40} />
     </div>
   );
 }
